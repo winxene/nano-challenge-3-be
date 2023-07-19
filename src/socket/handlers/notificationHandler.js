@@ -18,6 +18,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   const distance = earthRadius * c;
   return distance;
 }
+
 // Function to get the nearest available admin as adminID for a given user
 const getNearestAdminID = (user, dummyAdminDetailData) => {
   if (user.status === "requesting") {
