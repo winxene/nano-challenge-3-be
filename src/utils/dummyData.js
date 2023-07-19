@@ -1,38 +1,6 @@
 //note: the latitude range is between -6.2449373429657244 to -6.24356169422578
 // the longitude range is between 106.79798496354378 to 106.79824773542873
 
-// if the code fully works, delete this dummy report
-let dummyReport = [
-  {
-    userID: 1,
-    geolocationCoordinates: {
-      latitude: -6.244932845946446,
-      longitude: 106.79802070826771,
-    },
-  },
-  {
-    userID: 1,
-    geolocationCoordinates: {
-      latitude: -6.2449373429657244,
-      longitude: 106.79821898654653,
-    },
-  },
-  {
-    userID: 1,
-    geolocationCoordinates: {
-      latitude: -6.24356169422578,
-      longitude: 106.79824773542873,
-    },
-  },
-  {
-    userID: 1,
-    geolocationCoordinates: {
-      latitude: -6.243745787357868,
-      longitude: 106.79798496354378,
-    },
-  },
-];
-
 //dummy detail data for testing in JSON format
 let dummyDetailData = [
   {
@@ -43,7 +11,7 @@ let dummyDetailData = [
     pinType: "lansia",
     description: "Asep is Lansia",
     location: "Concourse",
-    status: "assisted", //assisted, requesting, not available
+    status: "assisted", //fine, assisted, requesting, not available
     userImage: "https://via.placeholder.com/150",
     locationImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
@@ -59,7 +27,7 @@ let dummyDetailData = [
     pinType: "ibu hamil",
     description: "Tina is Pregnant",
     location: "Toilet",
-    isHelped: "requesting", //assisted, requesting, not available
+    status: "requesting", //fine, assisted, requesting, not available
     userImage: "https://via.placeholder.com/150",
     locationImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
@@ -76,8 +44,12 @@ let dummyAdminDetailData = [
     name: "Admin 1",
     email: "admin1@email.com",
     password: "admin123",
-    status: "available", //available, on duty, not available
+    status: "on Duty", //available, on duty, not available
     adminImage: "https://via.placeholder.com/150",
+    geolocationCoordinates: {
+      latitude: -6.2449373429657244,
+      longitude: 106.79821898654653,
+    },
   },
   {
     adminID: 2,
@@ -86,15 +58,29 @@ let dummyAdminDetailData = [
     password: "admin123",
     status: "available", //available, on duty, not available
     adminImage: "https://via.placeholder.com/150",
+    geolocationCoordinates: {
+      latitude: -6.2449373429657274,
+      longitude: 106.7982189865466,
+    },
+  },
+  {
+    adminID: 3,
+    name: "Admin 3",
+    email: "admin3@email.com",
+    password: "admin123",
+    status: "available", //available, on duty, not available
+    adminImage: "https://via.placeholder.com/150",
+    geolocationCoordinates: {
+      latitude: -6.2449373429657244,
+      longitude: 106.79821898654653,
+    },
   },
 ];
 
 const getDummyUserDetailData = () => dummyDetailData;
 const getDummyAdminDetailData = () => dummyAdminDetailData;
-const getDummyReportData = () => dummyReport;
 
 module.exports = {
   getDummyUserDetailData,
-  getDummyReportData,
   getDummyAdminDetailData,
 };
