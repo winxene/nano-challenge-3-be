@@ -38,6 +38,7 @@ const getNearestAdminID = (user, dummyAdminDetailData) => {
           nearestAdminID = admin.adminID;
           nearestDistance = adminDistance;
         }
+        admin.status = "contacted";
       }
     });
 
