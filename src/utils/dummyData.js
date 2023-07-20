@@ -130,7 +130,7 @@ let dummyAdminDetailData = [
     name: "Admin 1",
     email: "admin1@email.com",
     password: "admin123",
-    status: "on Duty", //available, on duty, not available
+    status: "on Duty", //available, on duty, not available, contacted
     adminImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
       latitude: -6.2449373429657244,
@@ -142,7 +142,7 @@ let dummyAdminDetailData = [
     name: "Admin 2",
     email: "admin2@email.com",
     password: "admin123",
-    status: "available", //available, on duty, not available
+    status: "available", //available, on duty, not available, contacted
     adminImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
       latitude: -6.2449373429657274,
@@ -154,7 +154,7 @@ let dummyAdminDetailData = [
     name: "Admin 3",
     email: "admin3@email.com",
     password: "admin123",
-    status: "available", //available, on duty, not available
+    status: "available", //available, on duty, not available, contacted
     adminImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
       latitude: -6.2449373429657244,
