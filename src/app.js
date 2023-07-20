@@ -8,6 +8,7 @@ const io = socketIO(server);
 // Socket.io event handlers
 const reportHandler = require("./socket/handlers/reportHandler"); //delete this line
 const notificationHandler = require("./socket/handlers/notificationHandler");
+const coordinateHandler = require("./socket/handlers/coordinateHandler");
 
 // RESTful API routes
 const userDetailRoutes = require("./api/routes/userDetails");
@@ -28,6 +29,7 @@ app.use("/auth/admin", adminAuthRoutes);
 io.on("connection", (socket) => {
   reportHandler(socket);
   notificationHandler(socket);
+  coordinateHandler(socket);
 });
 
 const port = process.env.PORT || 3000;
