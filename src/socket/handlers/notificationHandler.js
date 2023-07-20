@@ -38,9 +38,32 @@ const getNearestAdminID = (user, dummyAdminDetailData) => {
           nearestAdminID = admin.adminID;
           nearestDistance = adminDistance;
         }
-        admin.status = "contacted";
       }
     });
+
+    if (nearestAdminID) {
+      const nearestAdmin = dummyAdminDetailData.find(
+        (admin) => admin.adminID === nearestAdminID
+      );
+
+      if (nearestAdmin.status === "available") {
+        // If the nearestAdminID is found and its status is available, change the status to "contacted"
+        nearestAdmin.status = "contacted";
+      } else {
+        // If the nearestAdminID is found but its status is already "contacted",
+        // find another available admin and update the nearestAdminID to the new admin's ID
+        nearestAdminID =
+          dummyAdminDetailData.find((admin) => admin.status === "available")
+            ?.adminID || null;
+
+        if (nearestAdminID) {
+          const newNearestAdmin = dummyAdminDetailData.find(
+            (admin) => admin.adminID === nearestAdminID
+          );
+          newNearestAdmin.status = "contacted";
+        }
+      }
+    }
 
     return nearestAdminID;
   }
