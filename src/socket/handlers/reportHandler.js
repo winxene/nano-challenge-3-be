@@ -36,7 +36,7 @@ const modifyStatus = (responseJsonString) => {
 const reportHandler = (socket) => {
   console.log("a user connected");
 
-  socket.on("reports", (data) => {
+  socket.on("report-notifications", (data) => {
     console.log("reports added to the database");
     console.log(data);
 
