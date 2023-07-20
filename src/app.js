@@ -12,6 +12,8 @@ const notificationHandler = require("./socket/handlers/notificationHandler");
 // RESTful API routes
 const userDetailRoutes = require("./api/routes/userDetails");
 const adminDetailRoutes = require("./api/routes/adminDetails");
+const userAuthRoutes = require("./api/routes/userAuth");
+const adminAuthRoutes = require("./api/routes/adminAuth");
 
 // Middleware
 app.use(express.json());
@@ -19,6 +21,8 @@ app.use(express.json());
 // RESTful API routes
 app.use("/user-detail", userDetailRoutes);
 app.use("/admin-detail", adminDetailRoutes);
+app.use("/auth/user", userAuthRoutes);
+app.use("/auth/admin", adminAuthRoutes);
 
 // Socket.io configuration and event handlers
 io.on("connection", (socket) => {
