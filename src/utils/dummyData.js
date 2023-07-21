@@ -80,10 +80,11 @@ let dummyDetailData = [
     password: "asep123",
     pinType: "lansia",
     description: "Asep is Lansia",
+    needs: "wheelchair",
+    age: "70",
     location: "Concourse",
     status: "assisted", //fine, assisted, requesting, not available
     userImage: "https://via.placeholder.com/150",
-    locationImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
       latitude: -6.243745787357868,
       longitude: 106.79798496354378,
@@ -96,10 +97,11 @@ let dummyDetailData = [
     password: "tina123",
     pinType: "ibu hamil",
     description: "Tina is Pregnant",
+    needs: "lift access",
+    age: "70",
     location: "Toilet",
     status: "requesting", //fine, assisted, requesting, not available
     userImage: "https://via.placeholder.com/150",
-    locationImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
       latitude: -6.2449373429657244,
       longitude: 106.79821898654653,
@@ -112,10 +114,11 @@ let dummyDetailData = [
     password: "toni123",
     pinType: "lansia",
     description: "Toni is Lansia",
+    needs: "wheelchair",
+    age: "70",
     location: "Platform",
     status: "fine", //fine, assisted, requesting, not available
     userImage: "https://via.placeholder.com/150",
-    locationImage: "https://via.placeholder.com/150",
     geolocationCoordinates: {
       latitude: -6.243745787357868,
       longitude: 106.79798496354378,
@@ -159,6 +162,30 @@ let dummyAdminDetailData = [
     geolocationCoordinates: {
       latitude: -6.2449373429657244,
       longitude: 106.79821898654653,
+    },
+  },
+  {
+    adminID: 4,
+    name: "Admin 4",
+    email: "admin4@email.com",
+    password: "admin123",
+    status: "available", //available, on duty, not available, contacted
+    adminImage: "https://via.placeholder.com/150",
+    geolocationCoordinates: {
+      latitude: -6.244937342965727,
+      longitude: 106.79821898654663,
+    },
+  },
+  {
+    adminID: 5,
+    name: "Admin 5",
+    email: "admin5@email.com",
+    password: "admin123",
+    status: "available", //available, on duty, not available, contacted
+    adminImage: "https://via.placeholder.com/150",
+    geolocationCoordinates: {
+      latitude: -6.2449373429657254,
+      longitude: 106.79821898654663,
     },
   },
 ];
