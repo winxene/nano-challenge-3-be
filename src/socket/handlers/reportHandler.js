@@ -31,6 +31,15 @@ const modifyStatus = (responseJsonString) => {
 
   // Update the user's status to "assisted" if accepted is true, otherwise set it to "requesting"
   userToUpdate.status = response.accepted ? "assisted" : "requesting";
+
+  // If user is accepted, revert back all admins whose status is "contacted" back to "available"
+  if (response.accepted) {
+    dummyAdminDetailData.forEach((admin) => {
+      if (admin.status === "contacted") {
+        admin.status = "available";
+      }
+    });
+  }
 };
 
 const reportHandler = (socket) => {
