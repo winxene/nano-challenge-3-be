@@ -6,7 +6,8 @@ const handleCoordinates = (socket) => {
   socket.on("admin-coordinates", (data) => {
     try {
       //JSON object cannot be used directly in JavaScript, so it must be converted first
-      const parsedData = JSON.parse(data);
+      // const parsedData = JSON.parse(data);
+      const parsedData = data;
 
       console.log("Received coordinates:", parsedData);
 
