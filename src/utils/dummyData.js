@@ -6,71 +6,6 @@ const maxLatitude = -6.24356169422578;
 const minLongitude = 106.79798496354378;
 const maxLongitude = 106.79824773542873;
 
-// Function to generate a random number within a range
-function getRandomNumber(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-// Function to generate random latitude and longitude
-function generateRandomCoordinates() {
-  const randomLatitude = getRandomNumber(minLatitude, maxLatitude);
-  const randomLongitude = getRandomNumber(minLongitude, maxLongitude);
-  return {
-    latitude: randomLatitude,
-    longitude: randomLongitude,
-  };
-}
-
-function modifyCoordinates(userID) {
-  const userIDToUpdate = userID;
-  const userToUpdate = dummyDetailData.find(
-    (user) => user.userID === userIDToUpdate
-  );
-
-  if (!userToUpdate) {
-    console.error(`User with userID ${userIDToUpdate} not found.`);
-    return;
-  }
-
-  const newCoordinates = generateRandomCoordinates();
-  userToUpdate.geolocationCoordinates = newCoordinates;
-}
-
-//function to check the status of the user
-function checkAndUpdateStatus(userID) {
-  const currentTime = Date.now();
-  const userToUpdate = dummyDetailData.find((user) => user.userID === userID);
-
-  if (!userToUpdate) {
-    console.error(`User with userID ${userID} not found.`);
-    return;
-  }
-
-  const lastUpdatedTime = userToUpdate.lastUpdatedTime || currentTime;
-  const timeDifference = currentTime - lastUpdatedTime;
-  const isInCoordinateRange =
-    userToUpdate.geolocationCoordinates.latitude >= minLatitude &&
-    userToUpdate.geolocationCoordinates.latitude <= maxLatitude &&
-    userToUpdate.geolocationCoordinates.longitude >= minLongitude &&
-    userToUpdate.geolocationCoordinates.longitude <= maxLongitude;
-
-  if (
-    userToUpdate.status === "fine" &&
-    isInCoordinateRange &&
-    timeDifference >= 60000
-  ) {
-    userToUpdate.status = "requesting";
-  }
-
-  // Update lastUpdatedTime for the user
-  userToUpdate.lastUpdatedTime = currentTime;
-}
-function updateStatusForAllUsers() {
-  dummyDetailData.forEach((user) => {
-    checkAndUpdateStatus(user.userID);
-  });
-}
-
 //dummy detail data for testing in JSON format
 let dummyDetailData = [
   {
@@ -79,8 +14,9 @@ let dummyDetailData = [
     email: "asep@email.com",
     password: "asep123",
     pinType: "lansia",
+    gender: "male",
     description: "Asep is Lansia",
-    needs: "wheelchair",
+    needs: "chair",
     age: "70",
     location: "Concourse",
     status: "assisted", //fine, assisted, requesting, not available
@@ -96,6 +32,7 @@ let dummyDetailData = [
     email: "tina@email.com",
     password: "tina123",
     pinType: "ibu hamil",
+    gender: "female",
     description: "Tina is Pregnant",
     needs: "lift access",
     age: "70",
@@ -113,6 +50,7 @@ let dummyDetailData = [
     email: "toni@email.com",
     password: "toni123",
     pinType: "lansia",
+    gender: "male",
     description: "Toni is Lansia",
     needs: "wheelchair",
     age: "70",
@@ -193,10 +131,75 @@ let dummyAdminDetailData = [
 const getDummyUserDetailData = () => dummyDetailData;
 const getDummyAdminDetailData = () => dummyAdminDetailData;
 
-setInterval(() => modifyCoordinates(3), 10000);
-setInterval(() => updateStatusForAllUsers(), 60000);
+// Function to generate a random number within a range
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+// Function to generate random latitude and longitude
+function generateRandomCoordinates() {
+  const randomLatitude = getRandomNumber(minLatitude, maxLatitude);
+  const randomLongitude = getRandomNumber(minLongitude, maxLongitude);
+  return {
+    latitude: randomLatitude,
+    longitude: randomLongitude,
+  };
+}
+
+function modifyCoordinates(userID) {
+  const userIDToUpdate = userID;
+  const userToUpdate = dummyDetailData.find(
+    (user) => user.userID === userIDToUpdate
+  );
+
+  if (!userToUpdate) {
+    console.error(`User with userID ${userIDToUpdate} not found.`);
+    return;
+  }
+
+  const newCoordinates = generateRandomCoordinates();
+  userToUpdate.geolocationCoordinates = newCoordinates;
+}
+
+//function to check the status of the user
+function checkAndUpdateStatus(userID) {
+  const currentTime = Date.now();
+  const userToUpdate = dummyDetailData.find((user) => user.userID === userID);
+
+  if (!userToUpdate) {
+    console.error(`User with userID ${userID} not found.`);
+    return;
+  }
+
+  const lastUpdatedTime = userToUpdate.lastUpdatedTime || currentTime;
+  const timeDifference = currentTime - lastUpdatedTime;
+  const isInCoordinateRange =
+    userToUpdate.geolocationCoordinates.latitude >= minLatitude &&
+    userToUpdate.geolocationCoordinates.latitude <= maxLatitude &&
+    userToUpdate.geolocationCoordinates.longitude >= minLongitude &&
+    userToUpdate.geolocationCoordinates.longitude <= maxLongitude;
+
+  if (
+    userToUpdate.status === "fine" &&
+    isInCoordinateRange &&
+    timeDifference >= 30000
+  ) {
+    userToUpdate.status = "requesting";
+    console.log(`User with userID ${userID} is requesting for assistance.`);
+  }
+
+  // Update lastUpdatedTime for the user
+  userToUpdate.lastUpdatedTime = currentTime;
+}
+function updateStatusForAllUsers() {
+  dummyDetailData.forEach((user) => {
+    checkAndUpdateStatus(user.userID);
+  });
+}
 
 module.exports = {
   getDummyUserDetailData,
   getDummyAdminDetailData,
+  modifyCoordinates,
+  updateStatusForAllUsers,
 };
