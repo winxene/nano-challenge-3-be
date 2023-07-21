@@ -12,6 +12,7 @@ io.sockets.setMaxListeners(20);
 const reportHandler = require("./socket/handlers/reportHandler"); //delete this line
 const notificationHandler = require("./socket/handlers/notificationHandler");
 const coordinateHandler = require("./socket/handlers/coordinateHandler");
+const userCoordinateHandler = require("./socket/handlers/userCoordinateHandler");
 
 // RESTful API routes
 const allUserDetailRoutes = require("./api/routes/details/allUserDetails");
@@ -52,6 +53,7 @@ io.on("connection", (socket) => {
   reportHandler(socket);
   notificationHandler(socket);
   coordinateHandler(socket);
+  userCoordinateHandler(socket);
 });
 
 const port = process.env.PORT || 3000;
