@@ -120,9 +120,11 @@ const notificationHandler = (socket) => {
     const notificationsData = generateNotification(dummyDetailData);
 
     if (notificationsData.length > 0) {
-      socket.emit("report-notifications", notificationsData);
+      // socket.emit("report-notifications", notificationsData);
+      // convert to pure JSON
+      socket.emit("report-notifications", JSON.stringify(notificationsData));
     }
-  }, 20000);
+  }, 8000);
 };
 
 module.exports = notificationHandler;

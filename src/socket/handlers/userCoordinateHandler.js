@@ -8,7 +8,7 @@ const dummyDetailData = getDummyUserDetailData(); // Fetch the dummy data here
 // Function to send user coordinates
 const sendUserCoordinates = (socket, usersCoordinates) => {
   // Emit the user coordinates array to the connected socket
-  socket.emit("user-coordinates", usersCoordinates);
+  socket.emit("user-coordinates", JSON.stringify(usersCoordinates));
 };
 
 const userCoordinatesHandler = (socket) => {
@@ -18,6 +18,7 @@ const userCoordinatesHandler = (socket) => {
   const collectUserCoordinates = () => {
     const usersCoordinates = dummyDetailData.map((user) => ({
       userID: user.userID,
+      status: user.status,
       geolocationCoordinates: user.geolocationCoordinates,
     }));
     return usersCoordinates;
@@ -37,6 +38,7 @@ const userCoordinatesHandler = (socket) => {
     if (
       !data ||
       !data.userID ||
+      !data.status ||
       !data.geolocationCoordinates ||
       !data.geolocationCoordinates.latitude ||
       !data.geolocationCoordinates.longitude
