@@ -39,6 +39,16 @@ const modifyStatus = (responseJsonString) => {
         admin.status = "available";
       }
     });
+  } else {
+    // Re-emit the modified data if the response is not accepted
+    const modifiedData = JSON.stringify({
+      adminID: response.adminID,
+      userID: response.userID,
+      title: `${userToUpdate.name} needs help`,
+      description: `${userToUpdate.name} needs help near ${userToUpdate.location}`,
+      accepted: response.accepted,
+    });
+    socket.emit("report-notifications", modifiedData);
   }
 };
 
