@@ -39,6 +39,7 @@ const handleCoordinates = (socket) => {
       };
 
       console.log("Admin location updated successfully!");
+      console.log(data);
     } catch (error) {
       console.error(error.message);
     }
