@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getReportAdminDetailData,
-} = require("../controllers/adminDetailController");
+} = require("../../controllers/details/adminDetailController");
 
 router.get("/", getReportAdminDetailData);
 

@@ -1,4 +1,4 @@
-const { getDummyAdminDetailData } = require("../../utils/dummyData");
+const { getDummyAdminDetailData } = require("../../../utils/dummyData");
 
 const getReportAdminDetailData = (req, res) => {
   const dummyDetailData = getDummyAdminDetailData();

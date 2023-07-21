@@ -1,4 +1,4 @@
-const { getDummyAdminDetailData } = require("../../utils/dummyData");
+const { getDummyAdminDetailData } = require("../../../utils/dummyData");
 
 const authenticateAdmin = (email, password, dummyAdminDetailData) => {
   const authenticatedAdmin = dummyAdminDetailData.find(
