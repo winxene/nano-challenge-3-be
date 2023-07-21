@@ -6,28 +6,29 @@ const {
 const dummyDetailData = getDummyUserDetailData(); // Fetch the dummy data here
 
 // Function to send user coordinates
-const sendUserCoordinates = (socket, userID, latitude, longitude) => {
-  const user = dummyDetailData.find((user) => user.userID === userID);
-  if (!user) {
-    console.error(`User with userID ${userID} not found.`);
-    return;
-  }
-
-  // Update the user's coordinates
-  user.geolocationCoordinates.latitude = latitude;
-  user.geolocationCoordinates.longitude = longitude;
-
-  // Emit the updated coordinates to the connected socket
-  socket.emit("user-coordinates", {
-    userID: user.userID,
-    geolocationCoordinates: user.geolocationCoordinates,
-  });
+const sendUserCoordinates = (socket, usersCoordinates) => {
+  // Emit the user coordinates array to the connected socket
+  socket.emit("user-coordinates", usersCoordinates);
 };
 
 const userCoordinatesHandler = (socket) => {
   console.log("a user connected");
 
-  // Handle user coordinates update event
+  // Function to collect all user coordinates
+  const collectUserCoordinates = () => {
+    const usersCoordinates = dummyDetailData.map((user) => ({
+      userID: user.userID,
+      geolocationCoordinates: user.geolocationCoordinates,
+    }));
+    return usersCoordinates;
+  };
+
+  // Emit all user coordinates every 10 seconds
+  setInterval(() => {
+    const usersCoordinates = collectUserCoordinates();
+    sendUserCoordinates(socket, usersCoordinates);
+  }, 10000);
+
   socket.on("update-coordinates", (data) => {
     console.log("received user coordinates update:");
     console.log(data);
@@ -49,29 +50,13 @@ const userCoordinatesHandler = (socket) => {
       const { userID, geolocationCoordinates } = data;
       sendUserCoordinates(
         socket,
-        userID,
-        geolocationCoordinates.latitude,
-        geolocationCoordinates.longitude
+        collectUserCoordinates() // Send all user coordinates after update
       );
       console.log("User coordinates updated successfully!");
     } catch (error) {
       console.error(error.message);
     }
   });
-
-  // Emit user coordinates for user IDs 1, 2, and 3 every 10 seconds
-  setInterval(() => {
-    const usersToEmit = [1, 2, 3];
-    usersToEmit.forEach((userID) => {
-      const user = dummyDetailData.find((user) => user.userID === userID);
-      if (user) {
-        socket.emit("user-coordinates", {
-          userID: user.userID,
-          geolocationCoordinates: user.geolocationCoordinates,
-        });
-      }
-    });
-  }, 10000);
 
   socket.on("disconnect", () => {
     console.log("user disconnected");
